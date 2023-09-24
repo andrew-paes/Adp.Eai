@@ -5,18 +5,18 @@ namespace Adp.Eai.Domain.Enums
     public enum MathOperation
     {
         [Description("Addition")]
-        Addition = 1,
+        ADDITION = 1,
 
         [Description("Subtraction")]
-        Subtraction = 2,
+        SUBTRACTION = 2,
 
         [Description("Multiplication")]
-        Multiplication = 3,
+        MULTIPLICATION = 3,
 
         [Description("Division")]
-        Division = 4,
+        DIVISION = 4,
 
         [Description("Remainder")]
-        Remainder = 5
+        REMAINDER = 5
     }
 }
