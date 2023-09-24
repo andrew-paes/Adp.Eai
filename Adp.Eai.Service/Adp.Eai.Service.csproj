@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Adp.Eai.Domain\Adp.Eai.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

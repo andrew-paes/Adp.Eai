@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Adp.Eai.Domain\Adp.Eai.Domain.csproj" />
+    <ProjectReference Include="..\Adp.Eai.Service\Adp.Eai.Service.csproj" />
   </ItemGroup>
 
 </Project>

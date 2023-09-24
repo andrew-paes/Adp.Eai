@@ -1,4 +1,5 @@
 using Adp.Eai.Domain.Enums;
+using Adp.Eai.Service.Utils;
 using System.Threading.Tasks;
 
 namespace Adp.Eai.Tests
@@ -13,16 +14,18 @@ namespace Adp.Eai.Tests
     /// </summary>
     public class CalculationTest
     {
+        #region [ Operation ]
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="operation"></param>
         [Theory]
-        [InlineData("ADDITION")]
-        [InlineData("SUBTRACTION")]
-        [InlineData("MULTIPLICATION")]
-        [InlineData("DIVISION")]
-        [InlineData("REMAINDER")]
+        [InlineData("Addition")]
+        [InlineData("Subtraction")]
+        [InlineData("Multiplication")]
+        [InlineData("Division")]
+        [InlineData("Remainder")]
 
         public void Calculation_IsKnown(string operation)
         {
@@ -35,7 +38,24 @@ namespace Adp.Eai.Tests
             Assert.True(result);
         }
 
-        #region [ Calculation ]
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operation"></param>
+        [Theory]
+        [InlineData("Xyz")]
+
+        public async void Calculation_IsNotKnown(string operation)
+        {
+            // Arrange
+
+            // Act and Assert
+            await Assert.ThrowsAsync<ArgumentException>(() => Calculator.PerformCalculation(operation, 0, 0));
+        }
+
+        #endregion
+
+        #region [ Addition ]
 
         /// <summary>
         /// 
@@ -43,17 +63,16 @@ namespace Adp.Eai.Tests
         /// <param name="operation"></param>
         /// <param name="left"></param>
         /// <param name="right"></param>
-        /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.ADDITION, -4, 3)]
-        [InlineData(MathOperation.ADDITION, 3, -4)]
-        [InlineData(MathOperation.ADDITION, long.MinValue, long.MaxValue)] //-9223372036854775808, 9223372036854775807
-        public void Calculation_Addition(MathOperation operation, long left, long right)
+        [InlineData("Addition", -4, 3)]
+        [InlineData("Addition", 3, -4)]
+        [InlineData("Addition", long.MinValue, long.MaxValue)] //-9223372036854775808, 9223372036854775807
+        public async void Calculation_Addition(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.ADDITION)) ? (left + right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(-1, result);
@@ -71,15 +90,15 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.SUBTRACTION, 0, 3)]
-        [InlineData(MathOperation.SUBTRACTION, 3, 6)]
-        [InlineData(MathOperation.SUBTRACTION, -2, 1)]
-        public void Calculation_SubtractionPositiveRight(MathOperation operation, long left, long right)
+        [InlineData("Subtraction", 0, 3)]
+        [InlineData("Subtraction", 3, 6)]
+        [InlineData("Subtraction", -2, 1)]
+        public async void Calculation_SubtractionPositiveRight(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.SUBTRACTION)) ? (left - right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(-3, result);
@@ -93,15 +112,15 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.SUBTRACTION, 0, -6)]
-        [InlineData(MathOperation.SUBTRACTION, -3, -9)]
-        [InlineData(MathOperation.SUBTRACTION, 3, -3)]
-        public void Calculation_SubtractionNegativeRight(MathOperation operation, long left, long right)
+        [InlineData("Subtraction", 0, -6)]
+        [InlineData("Subtraction", -3, -9)]
+        [InlineData("Subtraction", 3, -3)]
+        public async void Calculation_SubtractionNegativeRight(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.SUBTRACTION)) ? (left - right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(6, result);
@@ -119,17 +138,17 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.MULTIPLICATION, 0, 0)]
-        [InlineData(MathOperation.MULTIPLICATION, 0, 1)]
-        [InlineData(MathOperation.MULTIPLICATION, 1, 0)]
-        [InlineData(MathOperation.MULTIPLICATION, 0, -1)]
-        [InlineData(MathOperation.MULTIPLICATION, -1, 0)]
-        public void Calculation_MultiplicationZeroResult(MathOperation operation, long left, long right)
+        [InlineData("Multiplication", 0, 0)]
+        [InlineData("Multiplication", 0, 1)]
+        [InlineData("Multiplication", 1, 0)]
+        [InlineData("Multiplication", 0, -1)]
+        [InlineData("Multiplication", -1, 0)]
+        public async void Calculation_MultiplicationZeroResult(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.MULTIPLICATION)) ? (left * right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(0, result);
@@ -143,14 +162,14 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.MULTIPLICATION, -2, -3)]
-        [InlineData(MathOperation.MULTIPLICATION, 2, 3)]
-        public void Calculation_MultiplicationPositiveResult(MathOperation operation, long left, long right)
+        [InlineData("Multiplication", -2, -3)]
+        [InlineData("Multiplication", 2, 3)]
+        public async void Calculation_MultiplicationPositiveResult(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.MULTIPLICATION)) ? (left * right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(6, result);
@@ -164,14 +183,14 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.MULTIPLICATION, -2, 3)]
-        [InlineData(MathOperation.MULTIPLICATION, 2, -3)]
-        public void Calculation_MultiplicationNegativeResult(MathOperation operation, long left, long right)
+        [InlineData("Multiplication", -2, 3)]
+        [InlineData("Multiplication", 2, -3)]
+        public async void Calculation_MultiplicationNegativeResult(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.MULTIPLICATION)) ? (left * right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(-6, result);
@@ -188,20 +207,15 @@ namespace Adp.Eai.Tests
         /// <param name="left"></param>
         /// <param name="right"></param>
         [Theory]
-        [InlineData(MathOperation.DIVISION, 0, 0)]
-        [InlineData(MathOperation.DIVISION, 1, 0)]
-        [InlineData(MathOperation.DIVISION, -1, 0)]
-        public async void Calculation_DivisionByZero(MathOperation operation, long left, long right)
+        [InlineData("Division", 0, 0)]
+        [InlineData("Division", 1, 0)]
+        [InlineData("Division", -1, 0)]
+        public async void Calculation_DivisionByZero(string operation, long left, long right)
         {
             // Arrange
 
             // Act and Assert
-            await Assert.ThrowsAsync<DivideByZeroException>(() =>
-            {
-                long result = (operation.Equals(MathOperation.DIVISION)) ? (left / right) : 0;
-
-                throw new DivideByZeroException($"Unsupported operation: division of {left} by {right}");
-            });
+            await Assert.ThrowsAsync<DivideByZeroException>(() => Calculator.PerformCalculation(operation, 0, 0));
         }
 
         /// <summary>
@@ -212,15 +226,15 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.DIVISION, 0, 1)]
-        [InlineData(MathOperation.DIVISION, 0, -1)]
+        [InlineData("Division", 0, 1)]
+        [InlineData("Division", 0, -1)]
 
-        public void Calculation_DivisionZeroResult(MathOperation operation, long left, long right)
+        public async void Calculation_DivisionZeroResult(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.DIVISION)) ? (left / right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(0, result);
@@ -234,14 +248,14 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.DIVISION, -4, -2)]
-        [InlineData(MathOperation.DIVISION, 4, 2)]
-        public void Calculation_DivisionPositiveResult(MathOperation operation, long left, long right)
+        [InlineData("Division", -4, -2)]
+        [InlineData("Division", 4, 2)]
+        public async void Calculation_DivisionPositiveResult(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.DIVISION)) ? (left / right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(2, result);
@@ -255,14 +269,14 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.DIVISION, 4, -2)]
-        [InlineData(MathOperation.DIVISION, -4, 2)]
-        public void Calculation_DivisionNegativeResult(MathOperation operation, long left, long right)
+        [InlineData("Division", 4, -2)]
+        [InlineData("Division", -4, 2)]
+        public async void Calculation_DivisionNegativeResult(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.DIVISION)) ? (left / right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(-2, result);
@@ -279,19 +293,15 @@ namespace Adp.Eai.Tests
         /// <param name="left"></param>
         /// <param name="right"></param>
         [Theory]
-        [InlineData(MathOperation.REMAINDER, 1, 0)]
-        [InlineData(MathOperation.REMAINDER, -1, 0)]
-        public async void Calculation_RemainderByZero(MathOperation operation, long left, long right)
+        [InlineData("Remainder", 0, 0)]
+        [InlineData("Remainder", 1, 0)]
+        [InlineData("Remainder", -1, 0)]
+        public async void Calculation_RemainderByZero(string operation, long left, long right)
         {
             // Arrange
 
             // Act and Assert
-            await Assert.ThrowsAsync<DivideByZeroException>(() =>
-            {
-                long result = (operation.Equals(MathOperation.REMAINDER)) ? (left % right) : 0;
-
-                throw new DivideByZeroException($"Unsupported operation: division of {left} by {right}");
-            });
+            await Assert.ThrowsAsync<DivideByZeroException>(() => Calculator.PerformCalculation(operation, 0, 0));
         }
 
         /// <summary>
@@ -301,15 +311,14 @@ namespace Adp.Eai.Tests
         /// <param name="left"></param>
         /// <param name="right"></param>
         [Theory]
-        [InlineData(MathOperation.REMAINDER, 0, 0)]
-        [InlineData(MathOperation.REMAINDER, 0, 1)]
-        [InlineData(MathOperation.REMAINDER, 0, -1)]
-        public void Calculation_RemainderZeroResult(MathOperation operation, long left, long right)
+        [InlineData("Remainder", 0, 1)]
+        [InlineData("Remainder", 0, -1)]
+        public async void Calculation_RemainderZeroResult(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.DIVISION)) ? (left % right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(0, result);
@@ -323,16 +332,16 @@ namespace Adp.Eai.Tests
         /// <param name="right"></param>
         /// <returns></returns>
         [Theory]
-        [InlineData(MathOperation.REMAINDER, -4, -2)]
-        [InlineData(MathOperation.REMAINDER, 4, -2)]
-        [InlineData(MathOperation.REMAINDER, -4, 2)]
-        [InlineData(MathOperation.REMAINDER, 4, 2)]
-        public void Calculation_Remainder(MathOperation operation, long left, long right)
+        [InlineData("Remainder", -4, -2)]
+        [InlineData("Remainder", 4, -2)]
+        [InlineData("Remainder", -4, 2)]
+        [InlineData("Remainder", 4, 2)]
+        public async void Calculation_Remainder(string operation, long left, long right)
         {
             // Arrange
 
             // Act
-            long result = (operation.Equals(MathOperation.REMAINDER)) ? (left % right) : 0;
+            long result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(0, result);

@@ -1,18 +1,7 @@
-﻿using Adp.Eai.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Adp.Eai.Domain.Models
+﻿namespace Adp.Eai.Domain.Models
 {
-    public class Calculation
+    public class Calculation : GenericModel
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public Guid Id { get; set; }
         /// <summary>
         /// 
         /// </summary>
@@ -25,5 +14,9 @@ namespace Adp.Eai.Domain.Models
         /// 
         /// </summary>
         public long Right { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public long Result { get; set; }
     }
 }
