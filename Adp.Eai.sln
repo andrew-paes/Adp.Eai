@@ -5,7 +5,13 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adp.Eai.Api", "Adp.Eai.Api\Adp.Eai.Api.csproj", "{4AE32FAA-F6E9-494E-9E46-A9EADBD32569}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adp.Eai.Tests", "Adp.Eai.Tests\Adp.Eai.Tests.csproj", "{CA26A39E-04F7-43EE-9E8C-90A7FA06166F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adp.Eai.Tests", "Adp.Eai.Tests\Adp.Eai.Tests.csproj", "{CA26A39E-04F7-43EE-9E8C-90A7FA06166F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adp.Eai.Domain", "Adp.Eai.Domain\Adp.Eai.Domain.csproj", "{DBA6F4E2-2060-4A63-B663-46CEB5A268D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adp.Eai.Repository", "Adp.Eai.Repository\Adp.Eai.Repository.csproj", "{3C2034B7-0EBD-45F9-B617-FFCD8352454A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adp.Eai.Service", "Adp.Eai.Service\Adp.Eai.Service.csproj", "{AABED286-1033-4770-8067-9B5392530684}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{CA26A39E-04F7-43EE-9E8C-90A7FA06166F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA26A39E-04F7-43EE-9E8C-90A7FA06166F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA26A39E-04F7-43EE-9E8C-90A7FA06166F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBA6F4E2-2060-4A63-B663-46CEB5A268D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBA6F4E2-2060-4A63-B663-46CEB5A268D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBA6F4E2-2060-4A63-B663-46CEB5A268D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBA6F4E2-2060-4A63-B663-46CEB5A268D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C2034B7-0EBD-45F9-B617-FFCD8352454A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C2034B7-0EBD-45F9-B617-FFCD8352454A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C2034B7-0EBD-45F9-B617-FFCD8352454A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C2034B7-0EBD-45F9-B617-FFCD8352454A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AABED286-1033-4770-8067-9B5392530684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABED286-1033-4770-8067-9B5392530684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABED286-1033-4770-8067-9B5392530684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABED286-1033-4770-8067-9B5392530684}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
