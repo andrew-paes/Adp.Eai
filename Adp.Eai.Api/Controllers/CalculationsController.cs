@@ -24,6 +24,6 @@ namespace Adp.Eai.Api.Controllers
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
         [HttpGet("GetCalculation")]
-        public async Task<ActionResult<CalculationVM>> GetCalculationAsync() => Ok(await _service.GetCalculationResult());
+        public async Task<ActionResult<Calculation>> GetCalculationAsync() => Ok(await _service.GetCalculationResultAsync());
     }
 }

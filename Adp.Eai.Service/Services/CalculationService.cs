@@ -1,35 +1,42 @@
 ﻿using Adp.Eai.Domain.Models;
-using Adp.Eai.Domain.ViewModels;
 using Adp.Eai.Service.Interfaces;
 using Adp.Eai.Service.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http.Json;
 
 namespace Adp.Eai.Service.Services
 {
     public class CalculationService : GenericService<Calculation>, ICalculationService
     {
-        public async Task<CalculationVM> GetCalculationResult()
+        private static readonly HttpClient _httpClient = new()
         {
-            Calculation calculation = new()
-            {
-                Id = Guid.NewGuid(),
-                Operation = "addition",
-                Left = 3,
-                Right = 5,
-                CreatedDate = DateTime.Now
-            };
+            BaseAddress = new Uri("https://interview.adpeai.com"),
+        };
 
-            CalculationVM result = new()
-            {
-                Id = calculation.Id,
-                Result = await Calculator.PerformCalculation(calculation.Operation, calculation.Left, calculation.Right)
-            };
+        private static async Task<Calculation> GetCalculationAsync()
+        {
+            using HttpResponseMessage response = await _httpClient.GetAsync("api/v1/get-task");
 
-            return result;
+            response.EnsureSuccessStatusCode();
+
+            if (response.Content != null && response.Content.Headers.ContentType != null && response.Content.Headers.ContentType.MediaType != null && response.Content.Headers.ContentType.MediaType == "application/json")
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                //var contentStream = await response.Content.ReadAsStreamAsync();
+
+                //return await JsonSerializer.DeserializeAsync<Calculation>(contentStream, new JsonSerializerOptions { IgnoreNullValues = true, PropertyNameCaseInsensitive = true });
+
+                return await response.Content.ReadFromJsonAsync<Calculation>();
+            }
+
+            return null;
+        }
+
+        public async Task<Calculation> GetCalculationResultAsync()
+        {
+            Calculation calculation = await GetCalculationAsync();
+            calculation.Result = await Calculator.PerformCalculation(calculation.Operation, calculation.Left, calculation.Right);
+
+            return calculation;
         }
     }
 }

@@ -17,6 +17,6 @@
         /// <summary>
         /// 
         /// </summary>
-        public long Result { get; set; }
+        public decimal Result { get; set; }
     }
 }

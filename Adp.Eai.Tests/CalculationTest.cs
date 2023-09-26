@@ -72,7 +72,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(-1, result);
@@ -98,7 +98,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(-3, result);
@@ -120,7 +120,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(6, result);
@@ -148,7 +148,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(0, result);
@@ -169,7 +169,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(6, result);
@@ -190,7 +190,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(-6, result);
@@ -234,7 +234,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(0, result);
@@ -255,7 +255,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(2, result);
@@ -276,7 +276,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(-2, result);
@@ -318,7 +318,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(0, result);
@@ -341,7 +341,7 @@ namespace Adp.Eai.Tests
             // Arrange
 
             // Act
-            long result = await Calculator.PerformCalculation(operation, left, right);
+            decimal result = await Calculator.PerformCalculation(operation, left, right);
 
             // Assert
             Assert.Equal(0, result);
