@@ -1,3 +1,6 @@
+using Adp.Eai.Service.Interfaces;
+using Adp.Eai.Service.Services;
+
 namespace Adp.Eai.Api
 {
     public class Program
@@ -13,6 +16,8 @@ namespace Adp.Eai.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<ICalculationService, CalculationService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -25,7 +30,6 @@ namespace Adp.Eai.Api
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

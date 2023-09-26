@@ -10,6 +10,6 @@ namespace Adp.Eai.Service.Interfaces
 {
     public interface ICalculationService : IGenericService<Calculation>
     {
-        CalculationVM GetCalculationResult(Calculation param);
+        Task<CalculationVM> GetCalculationResult();
     }
 }
