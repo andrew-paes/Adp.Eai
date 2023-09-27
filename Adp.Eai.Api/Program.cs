@@ -18,6 +18,8 @@ namespace Adp.Eai.Api
 
             builder.Services.AddScoped<ICalculationService, CalculationService>();
 
+            builder.Services.AddHttpClient<CalculationService>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

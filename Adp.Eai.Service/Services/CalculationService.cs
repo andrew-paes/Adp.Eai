@@ -1,42 +1,58 @@
 ﻿using Adp.Eai.Domain.Models;
 using Adp.Eai.Service.Interfaces;
 using Adp.Eai.Service.Utils;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Net.Http.Json;
 
 namespace Adp.Eai.Service.Services
 {
     public class CalculationService : GenericService<Calculation>, ICalculationService
     {
-        private static readonly HttpClient _httpClient = new()
+        private static IConfiguration _configuration;
+        private static string? BaseAddress => _configuration.GetSection("ExternalAPI:BaseAddress").Value;
+        private static string? GetCalculationAddress => _configuration.GetSection("ExternalAPI:Get").Value;
+
+        private readonly IHttpClientFactory _httpClientFactory;
+
+        public CalculationService(IConfiguration configuration, IHttpClientFactory httpClientFactory)
         {
-            BaseAddress = new Uri("https://interview.adpeai.com"),
-        };
-
-        private static async Task<Calculation> GetCalculationAsync()
-        {
-            using HttpResponseMessage response = await _httpClient.GetAsync("api/v1/get-task");
-
-            response.EnsureSuccessStatusCode();
-
-            if (response.Content != null && response.Content.Headers.ContentType != null && response.Content.Headers.ContentType.MediaType != null && response.Content.Headers.ContentType.MediaType == "application/json")
-            {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
-                //var contentStream = await response.Content.ReadAsStreamAsync();
-
-                //return await JsonSerializer.DeserializeAsync<Calculation>(contentStream, new JsonSerializerOptions { IgnoreNullValues = true, PropertyNameCaseInsensitive = true });
-
-                return await response.Content.ReadFromJsonAsync<Calculation>();
-            }
-
-            return null;
+            _configuration = configuration;
+            _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<Calculation> GetCalculationResultAsync()
+        private async Task<T?> GetJsonStringAsync<T>(string? request)
         {
-            Calculation calculation = await GetCalculationAsync();
-            calculation.Result = await Calculator.PerformCalculation(calculation.Operation, calculation.Left, calculation.Right);
+            try
+            {
+                var client = _httpClientFactory.CreateClient();
+                client.DefaultRequestHeaders.Accept.Clear();
 
-            return calculation;
+                var resp = client.GetAsync(request).Result;
+
+                if (resp.IsSuccessStatusCode)
+                    return await resp.Content.ReadFromJsonAsync<T>();
+                else
+                    throw new HttpRequestException(resp.ReasonPhrase, new ApplicationException(resp.Content.ReadAsStringAsync().Result), resp.StatusCode);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Calculation?> GetCalculationResultAsync()
+        {
+            Calculation? calculation = GetJsonStringAsync<Calculation>($"{BaseAddress}/{GetCalculationAddress}").Result;
+
+            if (calculation != null)
+            {
+                calculation.Result = await Calculator.PerformCalculation(calculation.Operation, calculation.Left, calculation.Right);
+
+                return calculation;
+            }
+            else
+                return null;
         }
     }
 }
