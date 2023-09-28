@@ -1,5 +1,6 @@
 using Adp.Eai.Service.Interfaces;
 using Adp.Eai.Service.Services;
+using Adp.Eai.Service.Utils;
 
 namespace Adp.Eai.Api
 {
@@ -18,7 +19,7 @@ namespace Adp.Eai.Api
 
             builder.Services.AddScoped<ICalculationService, CalculationService>();
 
-            builder.Services.AddHttpClient<CalculationService>();
+            builder.Services.AddHttpClient<ApiClientFactory>();
 
             var app = builder.Build();
 

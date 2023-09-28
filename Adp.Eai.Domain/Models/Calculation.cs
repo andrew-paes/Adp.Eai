@@ -18,5 +18,9 @@
         /// 
         /// </summary>
         public decimal Result { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public object? PostResult { get; set; }
     }
 }

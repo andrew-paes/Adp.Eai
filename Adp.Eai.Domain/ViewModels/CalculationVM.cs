@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace Adp.Eai.Domain.ViewModels
 {
@@ -11,10 +7,12 @@ namespace Adp.Eai.Domain.ViewModels
         /// <summary>
         /// 
         /// </summary>
+        [JsonProperty("id")]
         public Guid Id { get; set; }
         /// <summary>
         /// 
         /// </summary>
-        public long Result { get; set; }
+        [JsonProperty("result")]
+        public decimal Result { get; set; }
     }
 }
